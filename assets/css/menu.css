@@ -11,7 +11,7 @@ a {
 
 .element {
     width: 120px;
-    height: 160px;
+    height: 175px;
     box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
     border: 1px solid rgba(127,255,255,0.25);
     font-family: Helvetica, sans-serif;
@@ -26,9 +26,9 @@ a {
 }
 
     .element .number {
-        position: absolute;
+        /* position: absolute;
         top: 20px;
-        right: 20px;
+        right: 20px; */
         font-size: 12px;
         color: rgba(127,255,255,0.75);
     }
@@ -46,7 +46,7 @@ a {
 
     .element .details {
         position: absolute;
-        bottom: 15px;
+        bottom: 2px;
         left: 0px;
         right: 0px;
         font-size: 12px;

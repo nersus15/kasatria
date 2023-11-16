@@ -9,7 +9,7 @@ if (!defined('BASEURL')) {
     $host = $_SERVER['HTTP_HOST'];
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
     $name = '';
-    if ($host == 'localhost') $name = 'kasatria';
+    /* if ($host == 'localhost') */ $name = 'kasatria';
 
     define('BASEURL', "$protocol://$host" . (!empty($name) ? ("/$name/") : '/'));
 }
@@ -25,22 +25,6 @@ if(!empty($urls)){
     $controllers = parseUrl();
     $class = ucfirst($controllers[0]);
     $method = count($controllers) >= 2 ? $controllers[1] : 'index';
-    $batas = strpos($method, '?');
-    if($batas !== false){
-        $m = substr($method, 0, $batas);
-        $get = explode('&', substr($method, $batas + 1));
-        $method = $m;
-
-        foreach($get as $v){
-            $arr = explode('=', $v);
-            $key = $arr[0];
-            $value = null;
-            if(count($arr) == 2)
-                $value = $arr[1];
-
-            $_GET[$key] = $value;
-        }
-    }
     if(count($controllers) > 2) {
         unset($controllers[0], $controllers[1]);
         $params = (array) $controllers;
@@ -63,5 +47,14 @@ if(!empty($urls)){
 }else{
     if(empty(sessiondata('login'))) redirect(base_url('auth/login'));
     // Home Page
+    if(defined('HOME_CONTROLLER')){
+        $class = explode('@', HOME_CONTROLLER)[0];
+        $method = explode('@', HOME_CONTROLLER)[1] ?? 'index';
+        include_once "./controllers/$class.php";
+        
+        $clz = new $class();
+        call_user_func_array(array($clz, $method), []);
+        exit;
+    }
     view('homepage');
 }

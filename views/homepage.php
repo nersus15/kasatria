@@ -17,7 +17,7 @@
         <button id="helix">HELIX</button>
         <button id="grid">GRID</button>
     </div>
-
+    
     <script type="importmap">
         {
             "imports": {
@@ -30,6 +30,9 @@
 
 <body>
 
+    <script>
+        var data = <?= json_encode($data)?>;
+    </script>
     <script type="module" src="./assets/js/main.js"></script>
 </body>
 
